@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: {{ include "hello-world.fullname" . }}
   labels:
+  asdsad
     {{- include "hello-world.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
@@ -12,13 +13,15 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "hello-world.selectorLabels" . | nindent 8 }}
+        {{- include "hello-world.selectorLabels" . | nindent 8 }
+        }
     spec:
-      serviceAccountName: {{ include "hello-world.serviceAccountName" . }}
-      containers:
+      serviceAccountName: {
+      { include "hello-world.serviceAccountName" . }}
+              containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: '{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}'
+                imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
               containerPort: 80
@@ -29,5 +32,6 @@ spec:
               port: http
           readinessProbe:
             httpGet:
+            
               path: /
               port: http
