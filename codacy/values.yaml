@@ -1,0 +1,355 @@
+global:
+  codacy:
+    url: "http://localhost:9000"
+    backendUrl: "http://localhost:9000"
+    environment: "production"
+    api:
+      url: "codacy-api"
+      port: 80
+    portal:
+      url: "codacy-portal"
+      port: 80
+      pullRequestListTimeoutSeconds : 30
+    engine:
+      url: "codacy-engine"
+      port: 80
+    tools:
+      url: "codacy-tools"
+      port: 80
+    listener:
+      url: "codacy-listener"
+      port: 80
+    remoteProviderService:
+      url: "codacy-remote-provider-service"
+      port: 80
+    workerManager:
+      url: "codacy-worker-manager"
+      port: 80
+    # Trial license. Valid for 4 users until the end of 2030
+    license: "lV5QUFrZhlibdCP/MN8pZo76B3jhPeL/RAk4E2AL2WZlGI8Vno/LfvAwnSHm26uY817I3qvEjfhIZFCkDi8R6PngiB+UiT+h8W0Blica8Sp+d5ngnh9HuhTG6xAIf7gAQxyJpn3boV87CKTO+5nHYSeJccMd+s8esMxoS84Z2xI="
+    installation:
+      version: development
+    documentation:
+      version: development
+
+  # github:
+  #   enabled: "false"
+  #   login: "false"
+  #   clientId: ""
+  #   clientSecret: ""
+  #   app:
+  #     name: "codacy"
+  #     id: "1234"
+  #     privateKey: ""
+
+  # githubEnterprise:
+  #   enabled: "false"
+  #   login: "false"
+  #   hostname: "github.example.com"
+  #   protocol: "https"
+  #   port: 443
+  #   disableSSL: "false"
+  #   isPrivateMode: "true"
+  #   clientId: ""
+  #   clientSecret: ""
+  #   app:
+  #     name: "codacy"
+  #     id: "1234"
+  #     privateKey: ""
+
+  # gitlab:
+  #   enabled: "false"
+  #   login: "false"
+  #   clientId: ""
+  #   clientSecret: ""
+
+  # gitlabEnterprise:
+  #   enabled: "false"
+  #   login: "false"
+  #   hostname: "gitlab.example.com"
+  #   protocol: "https"
+  #   port: 443
+  #   clientId: ""
+  #   clientSecret: ""
+
+  # bitbucket:
+  #   enabled: "false"
+  #   login: "false"
+  #   key: ""
+  #   secret: ""
+
+  # bitbucketEnterprise:
+  #   enabled: "false"
+  #   login: "false"
+  #   hostname: "bitbucket.example.com"
+  #   protocol: "http"
+  #   port: 7990
+  #   consumerKey: ""
+  #   consumerPublicKey: ""
+  #   consumerPrivateKey: ""
+
+  # email:
+  #   enabled: "false"
+  #   replyTo: "notifications@codacy.com"
+  #   smtp:
+  #     protocol: "smtp"
+  #     hostname: "smtp.example.com"
+  #     # username: ""
+  #     # password: ""
+  #     # port: 25
+
+  workerManager:
+    workers:
+      config:
+        imageVersion: stable
+        javaOpts: '-XX:MinRAMPercentage=50.0 -XX:MaxRAMPercentage=90.0'
+        inactivityTimeout: 30
+
+  git:
+    branchListTimeoutSeconds: 30
+
+  play:
+    cryptoSecret: "PLEASE_CHANGE_ME" # Generate one with `cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 128 | head -n 1`
+
+  akka: {}
+    # sessionSecret: "PLEASE_CHANGE_ME" # Generate one with `cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 128 | head -n 1`
+
+  filestore:
+    contentsSecret: "PLEASE_CHANGE_ME" # Generate one with `cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 128 | head -n 1`
+    uuidSecret: "PLEASE_CHANGE_ME" # Generate one with `cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 128 | head -n 1`
+
+  cacheSecret: "PLEASE_CHANGE_ME" # Generate one with `cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 128 | head -n 1`
+
+  minio:
+    create: true
+    location: codacy-minio
+    port: 9000
+    accessKey: "AKIAIOSFODNN7EXAMPLE"
+    secretKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+
+  s3:
+    bucket:
+      analysis:
+        name: "analysis"
+      coverage:
+        name: "coverage"
+      cliReports:
+        name: "cli-reports"
+      commitDiff:
+        name: "commit-diff"
+
+  rabbitmq:
+    create: true
+    rabbitmqUsername: rabbitmq-codacy
+    rabbitmqPassword: rabbitmq-codacy
+    rabbitmqvHost: "/"
+    host: codacy-rabbitmq-ha
+    port: 5672
+    ssl: "false"
+    timeout: 15s
+
+  defaultdb:
+    create: false
+    imageTag: "9.6.2"
+    postgresqlUsername: codacy
+    postgresqlDatabase: accounts
+    postgresqlPassword: codacy
+    host: codacy-postgres
+    service:
+      port: 5432
+
+  analysisdb:
+    create: false
+    imageTag: "9.6.2"
+    postgresqlUsername: codacy
+    postgresqlDatabase: analysis
+    postgresqlPassword: codacy
+    host: codacy-postgres
+    service:
+      port: 5432
+
+  resultsdb:
+    create: false
+    imageTag: "9.6.2"
+    postgresqlUsername: codacy
+    postgresqlDatabase: results
+    postgresqlPassword: codacy
+    host: codacy-postgres
+    service:
+      port: 5432
+
+  metricsdb:
+    create: false
+    imageTag: "9.6.2"
+    postgresqlUsername: codacy
+    postgresqlDatabase: metrics
+    postgresqlPassword: codacy
+    host: codacy-postgres
+    service:
+      port: 5432
+
+  filestoredb:
+    create: false
+    imageTag: "9.6.2"
+    postgresqlUsername: codacy
+    postgresqlDatabase: filestore
+    postgresqlPassword: codacy
+    host: codacy-postgres
+    service:
+      port: 5432
+
+  jobsdb:
+    create: false
+    imageTag: "9.6.2"
+    postgresqlUsername: codacy
+    postgresqlDatabase: jobs
+    postgresqlPassword: codacy
+    host: codacy-postgres
+    service:
+      port: 5432
+
+  listenerdb:
+    create: false
+    host: codacy-postgres
+    postgresqlUsername: "codacy"
+    postgresqlDatabase: "listener"
+    postgresqlPassword: "codacy"
+    service:
+      port: 5432
+
+  crowdb:
+    create: false
+    host: codacy-postgres
+    postgresqlUsername: codacy
+    postgresqlDatabase: crow
+    postgresqlPassword: codacy
+    service:
+      port: 5432
+
+  features:
+    #If you use git submodules to share configuration files for the tools you will need to enable this feature so codacy can detect these files on the submodules
+    cloneSubmodules: false
+
+  metrics:
+    serviceMonitor:
+      enabled: false
+    grafana:
+      enabled: false
+      label: "grafana_dashboard"
+
+codacy-ingress:
+  create: true
+  ingress:
+    hostname:
+      app: "codacy.example.com"
+      api: "codacy.example.com"
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      nginx.ingress.kubernetes.io/use-regex: "true"
+    extraPaths:
+      - backend:
+          serviceName: codacy-crow
+          servicePort: http
+        path: /monitoring
+
+## If you set this to be enabled: true, you must clean up the fluentd job yourself
+fluentdoperator:
+  enabled: true
+  defaultConfigmap: codacy-fluentd-config
+  bucketName: logs
+  expirationDays: 7
+  # https://github.com/vmware/kube-fluentd-operator/issues/119#issuecomment-630760826
+  interval: 60
+  rbac:
+    create: true
+  useReleaseNamespaceOnly: true
+  flushTimeout: "1h"
+
+  fluentd:
+    extraEnv:
+      # https://github.com/fluent/fluentd-kubernetes-daemonset#disable-systemd-input
+      FLUENTD_SYSTEMD_CONF: disable
+      # https://github.com/fluent/fluentd-kubernetes-daemonset#disable-prometheus-input-plugins
+      #FLUENTD_PROMETHEUS_CONF: disable
+
+crow:
+  create: true
+
+## YOU ARE NOT ADVISED TO CHANGE BEYOND THIS POINT
+## Defaults for Internal Storage coming from requirements
+## These values are ignored if 'create: false' in the global variables
+
+rabbitmq-ha:
+  rabbitmqErlangCookie: "PLEASE_CHANGE_ME_TO_A_RANDOM_STR" # Generate one with `cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
+  fullnameOverride: codacy-rabbitmq-ha
+  auth:
+    username: "rabbitmq-codacy"
+    password: "rabbitmq-codacy"
+  prometheus:
+    operator:
+      enabled: false
+  podManagementPolicy: Parallel
+  forceBoot: true # Allows a graceful recovery from 'Waiting for Mnesia tables' in case all rabbitmq pods restart.
+  loadDefinition: # Loads rabbitmq-secret.yaml to ensure that all queues are created upon rabbitmq restart.
+    enabled: true
+    existingSecret: rabbitmq-load-definition
+  extraConfiguration: |
+    management.load_definitions = /app/load_definition.json
+
+postgres:
+  fullnameOverride: codacy-postgres
+  imageTag: "9.6.2"
+  persistence:
+    enabled: false
+    # storageClass:
+    # size: 20Gi
+  #resources:
+  #  requests:
+  #    memory: 1024Mi
+  #    cpu: 1000m
+  postgresqlExtendedConf: {"sharedBuffers": "256MB", "maxConnections": "300"}
+  initdbScripts:
+    initdb.sql: |
+      CREATE USER codacy WITH PASSWORD 'codacy';
+      ALTER ROLE codacy WITH CREATEDB;
+      CREATE DATABASE accounts WITH OWNER=codacy;
+      CREATE DATABASE analysis WITH OWNER=codacy;
+      CREATE DATABASE results WITH OWNER=codacy;
+      CREATE DATABASE metrics WITH OWNER=codacy;
+      CREATE DATABASE filestore WITH OWNER=codacy;
+      CREATE DATABASE jobs WITH OWNER=codacy;
+      CREATE DATABASE listener WITH OWNER=codacy;
+      CREATE DATABASE crow WITH OWNER=codacy;
+
+minio:
+  fullnameOverride: codacy-minio
+  persistence:
+    size: 20Gi
+  minioConfig:
+    region: "eu-west-1"
+  buckets:
+  - name: "analysis"
+    policy: "public"
+    purge: "false"
+  - name: "coverage"
+    policy: "public"
+    purge: "false"
+  - name: "cli-reports"
+    policy: "public"
+    purge: "false"
+  - name: "commit-diff"
+    policy: "public"
+    purge: "false"
+  - name: "logs"
+    policy: "public"
+    purge: "false"
+  defaultBucket:
+    enabled: false
+
+worker-manager:
+  create: true
+  fullnameOverride: codacy-worker-manager
+  config:
+    play:
+      logFile: logback.xml
+    cloudAmqp: {} # This should be configured through global.rabbitmq.rabbitUsername and global.rabbitmq.rabbitPassword respectively

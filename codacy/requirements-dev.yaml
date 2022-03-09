@@ -1,0 +1,92 @@
+dependencies:
+- name: minio
+  version: 5.0.33
+  repository: https://charts.helm.sh/stable
+  condition: global.minio.create
+  alias: minio
+
+- name: rabbitmq
+  version: 7.5.7
+  repository: https://charts.bitnami.com/bitnami
+  condition: global.rabbitmq.create
+  alias: rabbitmq-ha
+
+- name: postgresql
+  version: 8.6.4
+  repository: https://charts.bitnami.com/bitnami
+  alias: postgres
+  condition: global.defaultdb.create, global.analysisdb.create, global.resultsdb.create,
+    global.metricsdb.create, global.filestoredb.create, global.jobsdb.create
+
+- name: log-router
+  version: 0.6.3
+  repository: https://charts.codacy.com/external
+  condition: fluentdoperator.enabled
+  alias: fluentdoperator
+  git: git@github.com:codacy/kube-fluentd-operator.git
+
+- name: codacy-ingress
+  version: ">0.1.1-0"
+  repository: https://charts.codacy.com/unstable
+  git: git@github.com:codacy/codacy-ingress.git
+  condition: codacy-ingress.create
+
+- name: portal
+  version: ">=6.16.0-0"
+  repository: https://charts.codacy.com/unstable
+  git: git@github.com:codacy/portal.git
+  condition: portal.create
+
+- name: ragnaros
+  version: ">=15.2.2-0"
+  repository: https://charts.codacy.com/unstable
+  git: git@github.com:codacy/ragnaros.git
+  condition: ragnaros.create
+
+- name: remote-provider-service
+  version: ">=8.6.0-0"
+  repository: https://charts.codacy.com/unstable
+  git: git@github.com:codacy/remote-provider-service.git
+  condition: remote-provider-service.create
+
+- name: listener
+  version: ">=7.11.0-0"
+  repository: https://charts.codacy.com/unstable
+  git: git@github.com:codacy/repository-listener.git
+  condition: listener.create
+
+- name: engine
+  version: ">=7.6.1-0"
+  repository: https://charts.codacy.com/unstable
+  git: git@github.com:codacy/codacy-worker.git
+  condition: engine.create
+
+- name: codacy-tools
+  version: ">=0.4.1"
+  repository: https://charts.codacy.com/stable
+  git: git@github.com:codacy/codacy-tools.git
+  condition: codacy-tools.create
+
+- name: codacy-api
+  version: ">=8.14.0-0"
+  repository: https://charts.codacy.com/unstable
+  git: git@github.com:codacy/codacy-website.git
+  condition: codacy-api.create
+
+- name: worker-manager
+  version: ">=10.0.0-0"
+  repository: https://charts.codacy.com/unstable
+  git: git@github.com:codacy/worker-manager.git
+  condition: worker-manager.create
+
+- name: crow
+  version: ">=4.4.0-0"
+  repository: https://charts.codacy.com/unstable
+  git: git@github.com:codacy/crow.git
+  condition: crow.create
+
+- name: codacy-spa
+  version: ">=0.2.0-0"
+  repository: https://charts.codacy.com/unstable
+  git: git@github.com:codacy/codacy-spa.git
+  condition: codacy-spa.create
